@@ -83,8 +83,10 @@ public class PropertiesUtil {
 	       if (null == appApiCfg) {
 	           InputStream inStream = null;
 	           if(BuildMod.DEBUG){
+	        	   //debug model
 	        	   inStream = new BufferedInputStream(PropertiesUtil.class.getResourceAsStream(DEBUG_PROP_FILE_PATH + P_APP_API_CFG));
 			   }else{
+				   //release model
 				   inStream = new BufferedInputStream(PropertiesUtil.class.getResourceAsStream(RELEASE_PROP_FILE_PATH + P_APP_API_CFG));
 			   }
            
@@ -111,8 +113,10 @@ public class PropertiesUtil {
 	       if(null == appBaseCfg){
 	           InputStream inStream = null;
 	           if(BuildMod.DEBUG){
+	        	    //debug model
 				    inStream = new BufferedInputStream(PropertiesUtil.class.getResourceAsStream(DEBUG_PROP_FILE_PATH + P_APP_BASE_CFG));
 			   }else{
+				    //release model
 			   	    inStream = new BufferedInputStream(PropertiesUtil.class.getResourceAsStream(RELEASE_PROP_FILE_PATH + P_APP_BASE_CFG));
 			   }
 	           
