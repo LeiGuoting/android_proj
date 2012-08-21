@@ -4,12 +4,11 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
 import com.fbc.BuildMod;
 import com.fbc.exception.SysException;
 
 /**
- * The class for getting configure's 
+ * The class for getting configure's data
  * 
  * @author lei.guoting
  */
@@ -21,7 +20,7 @@ public class PropertiesUtil {
       public static final String P_APP_API_CFG = "app_api_cfg.properties";
       public static final String P_APP_BASE_CFG = "app_base_cfg.properties";
       
-      private static Properties appApi;
+      private static Properties appApiCfg;
       private static Properties appBaseCfg;  
       
       /**
@@ -81,21 +80,19 @@ public class PropertiesUtil {
       }
       
       private static Properties getAppApiObj(){
-	       if (null == appApi) {
+	       if (null == appApiCfg) {
 	           InputStream inStream = null;
 	           if(BuildMod.DEBUG){
-			       //in = new BufferedInputStream(assManager.open(DEBUG_PROP_FILE_PATH + P_APP_API_CFG)); 
 	        	   inStream = new BufferedInputStream(PropertiesUtil.class.getResourceAsStream(DEBUG_PROP_FILE_PATH + P_APP_API_CFG));
 			   }else{
-			       //in = new BufferedInputStream(assManager.open(RELEASE_PROP_FILE_PATH + P_APP_API_CFG)); 
 				   inStream = new BufferedInputStream(PropertiesUtil.class.getResourceAsStream(RELEASE_PROP_FILE_PATH + P_APP_API_CFG));
 			   }
            
-	           appApi = new Properties();
+	           appApiCfg = new Properties();
 	           try {
-	       	        appApi.load(inStream);
+	        	   appApiCfg.load(inStream);
 	           } catch (IOException e) {
-	       	        appApi = null;
+	        	   appApiCfg = null;
 	       	        throw new SysException(e);
 	           } finally{
 	       	        try{
@@ -107,9 +104,7 @@ public class PropertiesUtil {
 	           }
 	       }
 	       
-	       synchronized(appApi){
-	           return appApi;
-	       }
+	       return appApiCfg;
       }
       
       private static Properties getAppBaseCfgObj(){
@@ -117,9 +112,7 @@ public class PropertiesUtil {
 	           InputStream inStream = null;
 	           if(BuildMod.DEBUG){
 				    inStream = new BufferedInputStream(PropertiesUtil.class.getResourceAsStream(DEBUG_PROP_FILE_PATH + P_APP_BASE_CFG));
-				    //inStream = new BufferedInputStream(assManager.open(DEBUG_PROP_FILE_PATH + P_APP_BASE_CFG));  
 			   }else{
-			   	    //inStream = new BufferedInputStream(assManager.open(RELEASE_PROP_FILE_PATH + P_APP_BASE_CFG));
 			   	    inStream = new BufferedInputStream(PropertiesUtil.class.getResourceAsStream(RELEASE_PROP_FILE_PATH + P_APP_BASE_CFG));
 			   }
 	           
@@ -139,8 +132,6 @@ public class PropertiesUtil {
 	           }
 	       }   
 	       
-	       synchronized(appBaseCfg){
-	           return appBaseCfg;
-	       }   
+	       return appBaseCfg;
       }
 }
