@@ -1,6 +1,8 @@
 package com.fbc.activity;
 
 import com.fbc.R;
+import com.fbc.util.Log;
+
 import android.os.Bundle;
 
 public class MainActivity extends AbstractActivity {
@@ -10,6 +12,7 @@ public class MainActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d(TAG, "@@@@@@@@@@");
     }
 
     /*@Override
